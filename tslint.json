@@ -1,0 +1,9 @@
+{
+  "extends": ["../tslint.json", "tslint-react"],
+  "linterOptions": {
+    "exclude": ["node_modules/**/*.ts", "config/**/*.js", "coverage/**/*"]
+  },
+  "rules": {
+    "only-arrow-functions": false
+  }
+}

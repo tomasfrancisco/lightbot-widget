@@ -1,0 +1,82 @@
+{
+  "name": "@lightbot/widget",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "apollo-boost": "^0.1.10",
+    "axios": "^0.18.0",
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.9.2",
+    "js-cookie": "^2.2.0",
+    "lodash.get": "^4.4.2",
+    "lodash.throttle": "^4.1.1",
+    "mobx": "^5.0.3",
+    "mobx-react": "^5.2.3",
+    "polished": "^1.9.3",
+    "react": "^16.4.1",
+    "react-apollo": "^2.1.9",
+    "react-custom-scrollbars": "^4.2.1",
+    "react-dom": "^16.4.1",
+    "react-frame-component": "^4.0.1",
+    "react-icons": "^2.2.7",
+    "react-image": "^1.5.1",
+    "react-linkify": "^0.2.2",
+    "react-resize-detector": "^3.1.0",
+    "react-scripts-ts": "2.16.0",
+    "recompose": "^0.27.1",
+    "styled-components": "^3.3.3",
+    "uuid": "^3.3.2",
+    "webfontloader": "^1.6.28"
+  },
+  "scripts": {
+    "postinstall": "cd ../@lightbot && yarn link-packages && cd ../widget && yarn link @lightbot/browser-storage @lightbot/widget-configuration",
+    "start": "react-scripts-ts start",
+    "build": "tslint --project . --config tslint.prod.json && react-scripts-ts build",
+    "test": "NODE_PATH=src react-scripts-ts test --transformIgnorePatterns \"node_modules/(?!@lightbot)/\" --env=jsdom",
+    "test:coverage": "yarn test --coverage",
+    "lint": "tslint -p ./tsconfig.json",
+    "eject": "react-scripts-ts eject",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^3.4.8",
+    "@storybook/addon-links": "^3.4.8",
+    "@storybook/react": "^3.4.8",
+    "@types/enzyme": "^3.1.12",
+    "@types/enzyme-adapter-react-16": "^1.0.2",
+    "@types/jest": "^23.1.6",
+    "@types/js-cookie": "^2.1.0",
+    "@types/lodash.get": "^4.4.4",
+    "@types/node": "^10.5.2",
+    "@types/prop-types": "^15.5.3",
+    "@types/react": "^16.4.6",
+    "@types/react-custom-scrollbars": "^4.0.4",
+    "@types/react-dom": "^16.0.6",
+    "@types/react-icons": "^2.2.5",
+    "@types/react-resize-detector": "^2.2.0",
+    "@types/recompose": "^0.30.0",
+    "@types/storybook__react": "^3.0.8",
+    "@types/uuid": "^3.4.3",
+    "@types/webfontloader": "^1.6.29",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.4",
+    "jest-styled-components": "^5.0.1",
+    "mobx-react-devtools": "^6.0.1",
+    "typescript": "^2.9.2"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 22.38,
+        "functions": 14.45,
+        "lines": 28.04,
+        "statements": 28.52
+      }
+    }
+  }
+}

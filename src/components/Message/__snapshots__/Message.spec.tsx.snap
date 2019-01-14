@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`modules/Widget/Window renders 1`] = `
+<styled.div
+  className="message-wrapper"
+>
+  <WithTheme(styled.div)
+    className="message-tag"
+  />
+</styled.div>
+`;
