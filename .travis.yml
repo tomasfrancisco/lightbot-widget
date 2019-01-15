@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - "10.10"
+
+jobs:
+  include:
+    - stage: test
+      name: "Build Widget"
+      script:
+        - echo "Building widget..."
+        - yarn
+        - yarn build
+    - stage: test
+      name: "Testing Widget"
+      script:
+        - yarn
+        - yarn test:coverage

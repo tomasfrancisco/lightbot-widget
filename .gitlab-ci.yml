@@ -1,0 +1,51 @@
+variables:
+  GIT_STRATEGY: recursive
+
+stages:
+  - test
+  - deploy
+
+.run_build_template:
+  image: node:10.10
+  script:
+    - echo "Building widget..."
+    - yarn
+    - yarn build
+    - echo "Preparing distribution version..."
+    - rm -rf dist
+    - mkdir dist
+    - cp ./build/static/js/main.*.js ./dist/lightbot.js
+    - cd ..
+  artifacts:
+    paths:
+      - ./widget/dist
+
+.run_widget_deploy_template:
+  image: python:latest
+  dependencies:
+    - run_build
+  script:
+    - pip install awscli
+    - aws s3 sync ./widget/dist/ s3://widget.lightbot.io --delete --debug
+    - aws cloudfront create-invalidation --distribution-id ${AWS_CLOUDFRONT_WIDGET_INSTANCE_ID} --paths "/*"
+
+run_build:
+  stage: test
+  extends: .run_build_template
+  when: manual
+
+run_manual_build:
+  extends: .run_build_template
+  only:
+    - master
+
+run_widget_deploy:
+  stage: deploy
+  extends: .run_widget_deploy_template
+  only:
+    - master
+
+run_manual_widget_deploy:
+  stage: deploy
+  extends: .run_widget_deploy_template
+  when: manual

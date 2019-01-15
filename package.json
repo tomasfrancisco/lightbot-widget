@@ -2,6 +2,9 @@
   "name": "@lightbot/widget",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "src/@lightbot/types"
+  ],
   "dependencies": {
     "apollo-boost": "^0.1.10",
     "axios": "^0.18.0",
@@ -29,7 +32,6 @@
     "webfontloader": "^1.6.28"
   },
   "scripts": {
-    "postinstall": "cd ../@lightbot && yarn link-packages && cd ../widget && yarn link @lightbot/browser-storage @lightbot/widget-configuration",
     "start": "react-scripts-ts start",
     "build": "tslint --project . --config tslint.prod.json && react-scripts-ts build",
     "test": "NODE_PATH=src react-scripts-ts test --transformIgnorePatterns \"node_modules/(?!@lightbot)/\" --env=jsdom",

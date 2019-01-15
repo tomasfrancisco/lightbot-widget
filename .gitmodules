@@ -1,3 +1,3 @@
-[submodule "lightbot-ssot"]
-	path = lightbot-ssot
+[submodule "src/@lightbot"]
+	path = src/@lightbot
 	url = https://github.com/lightbasenl/lightbot-ssot.git
