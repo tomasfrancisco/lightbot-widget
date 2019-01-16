@@ -67,8 +67,8 @@ const ButtonContent = styled<HotspotButtonProps, "div">("div")`
       props.isMobileVersion
         ? "transparent"
         : props.theme.hotspotButtonColor
-          ? props.theme.hotspotButtonColor
-          : "black"
+        ? props.theme.hotspotButtonColor
+        : "black"
     };
     color: ${props.theme.closeButtonColor ? props.theme.closeButtonColor : "#252b2d"};
     opacity: ${props.isMobileVersion ? 0 : 1};
