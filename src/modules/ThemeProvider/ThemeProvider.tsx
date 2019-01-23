@@ -1,4 +1,4 @@
-import { theme } from "@lightbot/widget-configuration";
+import { theme } from "lightbot-ssot/lib";
 import * as React from "react";
 import { ThemeProvider as Provider } from "styled-components";
 

@@ -1,4 +1,4 @@
-import { Storage, StorageConstantsEnum } from "@lightbot/browser-storage";
+import { StorageConstantsEnum } from "lightbot-ssot/lib";
 import { ChatStore } from "modules/Widget/modules/ChatModal/stores/ChatStore";
 import { getBrowserStorageMock } from "utils/tests/browserStorageMock";
 

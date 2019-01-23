@@ -1,4 +1,4 @@
-import { Storage } from "@lightbot/browser-storage";
+import { Storage } from "lightbot-ssot/lib";
 
 interface BrowserStorageMockProps {
   localStorage?: any;

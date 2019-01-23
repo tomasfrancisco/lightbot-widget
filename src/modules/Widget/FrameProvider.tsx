@@ -1,4 +1,4 @@
-import { theme as globalTheme } from "@lightbot/widget-configuration";
+import { theme as globalTheme } from "lightbot-ssot/lib";
 import * as React from "react";
 import { FrameContextConsumer } from "react-frame-component";
 import { StyleSheetManager, ThemeProvider } from "styled-components";

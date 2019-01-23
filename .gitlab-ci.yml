@@ -54,3 +54,21 @@ run_manual_widget_deploy:
   dependencies:
     - run_manual_build
   when: manual
+
+
+# Docker build
+run_docker_build:
+  stage: deploy
+  image: docker
+  services:
+    - docker:dind
+  only:
+    - new-backend
+  before_script:
+    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+  script:
+    - printenv | grep -i "react_app_" >> .env.production
+    - docker build -t ${CI_REGISTRY}/lightbase/lightbot-widget:latest -t ${CI_REGISTRY}/lightbase/lightbot-widget:$CI_COMMIT_SHA .
+    - docker push ${CI_REGISTRY}/lightbase/lightbot-widget:latest
+    - docker push ${CI_REGISTRY}/lightbase/lightbot-widget:$CI_COMMIT_SHA
+

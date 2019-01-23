@@ -1,4 +1,4 @@
-import { WidgetThemeProps } from "@lightbot/widget-configuration";
+import { WidgetThemeProps } from "lightbot-ssot/lib";
 import { darken, lighten } from "polished";
 import * as React from "react";
 import styled, { ThemedOuterStyledProps } from "styled-components";

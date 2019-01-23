@@ -7,11 +7,7 @@ import { v4 as uuid } from "uuid";
 
 import { FetchingMessage } from "./FetchingMessage";
 import {
-  JumpMessage,
-  LinkMessage,
-  MessageSenderEnum,
-  MessageType,
-  MessageTypeEnum,
+   JumpMessage, LinkMessage, MessageSenderEnum, MessageType, MessageTypeEnum,
 } from "./Message.type";
 
 export class MessageModule extends React.Component<{

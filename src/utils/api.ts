@@ -2,8 +2,6 @@ import axios from "axios";
 
 const HOST = process.env.REACT_APP_AGENT_HOST;
 
-export const getAgents = () => axios.get(`${HOST}/agents`);
-
 export const getAgentData = (agentId: string) =>
   axios.get(`${HOST}/agent-data?lightbot_agent_id=${agentId}`);
 

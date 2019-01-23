@@ -12,7 +12,7 @@ describe("modules/Widget/Window", () => {
     component = shallow(
       storeProvider({
         chatStore: new ChatStore({ id: "agentId" }, getBrowserStorageMock()),
-      })(<Window agentId="agentId" />),
+      })(<Window agentId={"agentId"} />),
     );
   });
 

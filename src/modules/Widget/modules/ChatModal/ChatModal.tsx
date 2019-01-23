@@ -10,10 +10,7 @@ import CloseIcon from "react-icons/lib/fa/chevron-down";
 import { v4 as uuid } from "uuid";
 
 import {
-  MessageModule as Message,
-  MessageSenderEnum,
-  MessageType,
-  MessageTypeEnum,
+   MessageModule as Message, MessageSenderEnum, MessageType, MessageTypeEnum,
 } from "../Message";
 import { fetchingMessage } from "../Message/constants";
 import { ChatStore } from "./stores/ChatStore";

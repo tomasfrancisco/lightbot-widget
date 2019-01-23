@@ -1,6 +1,6 @@
-import { theme } from "@lightbot/widget-configuration";
 import { Button } from "components/Button";
 import { shallow } from "enzyme";
+import { theme } from "lightbot-ssot/lib";
 import * as React from "react";
 
 describe("components/Button", () => {

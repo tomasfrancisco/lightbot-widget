@@ -1,8 +1,6 @@
-import { StorageConstantsEnum, StorageInstance } from "@lightbot/browser-storage";
 import { Provider as StateProvider } from "mobx-react";
 import { ChatStore } from "modules/Widget/modules/ChatModal";
 import * as React from "react";
-import { v4 as uuid } from "uuid";
 
 import { Widget } from "../Widget/Widget";
 

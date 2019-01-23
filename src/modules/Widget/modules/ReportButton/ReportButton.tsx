@@ -3,7 +3,6 @@ import { ChatStore } from "modules/Widget/modules/ChatModal";
 import { darken } from "polished";
 import * as React from "react";
 import styled from "styled-components";
-import { sendFeedback } from "utils/api";
 
 const Wrapper = styled.button`
   display: inline-block;

@@ -1,7 +1,9 @@
-import { Storage, StorageConstantsEnum, StorageInstance } from "@lightbot/browser-storage";
+import { StorageConstantsEnum, StorageInstance } from "lightbot-ssot/lib";
 import _get from "lodash.get";
 import { action, computed, observable, toJS } from "mobx";
-import { MessageSenderEnum, MessageType, MessageTypeEnum } from "modules/Widget/modules/Message";
+import {
+   MessageSenderEnum, MessageType, MessageTypeEnum,
+} from "modules/Widget/modules/Message";
 import { getAgentData, sendEvent, sendFeedback, sendMessage, startChat } from "utils/api";
 import uuid from "uuid/v4";
 

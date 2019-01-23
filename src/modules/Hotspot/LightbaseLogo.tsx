@@ -1,6 +1,6 @@
 import * as React from "react";
 import Img from "react-image";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 type LightbaseLogoProps = {
   iconSrc?: string | null;

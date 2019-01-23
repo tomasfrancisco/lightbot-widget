@@ -9,7 +9,7 @@ function init() {
     if (element) {
       agentId = element.getAttribute("data-agent-id");
     } else {
-      agentId = "f7196e92-076a-4d42-b612-b118f5325759"; // Test agent id
+      agentId = "4565b699-6d3a-4915-9722-f00fc9f1a032"; // Test agent id, configured the same in lightbot-backend
     }
     return agentId;
   };
