@@ -1,6 +1,6 @@
 # Lightbot Widget
 
-[![Build Status](https://travis-ci.com/lightbasenl/lightbot-widget.svg?branch=master)](https://travis-ci.com/lightbasenl/lightbot-widget)
+[![Build Status](https://api.cirrus-ci.com/github/lightbasenl/lightbot-widget.svg)](https://cirrus-ci.com/github/lightbasenl/lightbot-widget)
 
 ## About
 
