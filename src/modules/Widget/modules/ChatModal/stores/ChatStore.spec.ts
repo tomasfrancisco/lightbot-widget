@@ -2,14 +2,24 @@ import { StorageConstantsEnum } from "lightbot-ssot/lib";
 import { ChatStore } from "modules/Widget/modules/ChatModal/stores/ChatStore";
 import { getBrowserStorageMock } from "utils/tests/browserStorageMock";
 
-const createStore = ({ isOpen, sessionId, userId }) =>
+const createStore = ({ isOpen, agentId, sessionId, userId }) =>
   new ChatStore(
-    { id: "agentId" },
+    { id: agentId },
     getBrowserStorageMock({
       localStorage: {
         getItem: key => {
+          if (key.includes(StorageConstantsEnum.CHAT_AGENT_DATA)) {
+            return JSON.stringify({
+              id: agentId,
+            });
+          }
+
           if (key.includes(StorageConstantsEnum.USER_ID)) {
             return userId;
+          }
+
+          if (key.includes(StorageConstantsEnum.SESSION_ID)) {
+            return sessionId;
           }
 
           if (key.includes(StorageConstantsEnum.CHAT_IS_OPEN)) {
@@ -17,6 +27,9 @@ const createStore = ({ isOpen, sessionId, userId }) =>
           }
         },
         setItem: (key, newValue) => {
+          return;
+        },
+        removeItem: () => {
           return;
         },
       },
@@ -42,6 +55,7 @@ describe("modules/Widget/modules/ChatModal/stores/ChatStore", () => {
       isOpen = false;
       chatStore = createStore({
         isOpen,
+        agentId: "agentId",
         sessionId: "sessionId",
         userId: "userId",
       });
@@ -62,7 +76,12 @@ describe("modules/Widget/modules/ChatModal/stores/ChatStore", () => {
 
     beforeEach(() => {
       isOpen = true;
-      chatStore = createStore({ isOpen, sessionId: "sessionId", userId: "userId" });
+      chatStore = createStore({
+        isOpen,
+        agentId: "agentId",
+        sessionId: "sessionId",
+        userId: "userId",
+      });
     });
 
     it("started is false", () => {
@@ -80,7 +99,12 @@ describe("modules/Widget/modules/ChatModal/stores/ChatStore", () => {
 
     beforeEach(() => {
       isOpen = false;
-      chatStore = createStore({ isOpen, sessionId: "sessionId", userId: "userId" });
+      chatStore = createStore({
+        isOpen,
+        agentId: "agentId",
+        sessionId: "sessionId",
+        userId: "userId",
+      });
     });
 
     describe("started$ is false", () => {

@@ -1,9 +1,7 @@
 import { StorageConstantsEnum, StorageInstance } from "lightbot-ssot/lib";
 import _get from "lodash.get";
 import { action, computed, observable, toJS } from "mobx";
-import {
-   MessageSenderEnum, MessageType, MessageTypeEnum,
-} from "modules/Widget/modules/Message";
+import { MessageSenderEnum, MessageType, MessageTypeEnum } from "modules/Widget/modules/Message";
 import { getAgentData, sendEvent, sendFeedback, sendMessage, startChat } from "utils/api";
 import uuid from "uuid/v4";
 
@@ -77,9 +75,11 @@ export class ChatStore {
     }
 
     const shouldLoadFromStorage = !!(userId && sessionId);
-    await this.loadIsOpenState(shouldLoadFromStorage);
-    await this.loadAgentData(shouldLoadFromStorage);
-    await this.loadMessagesHistory(shouldLoadFromStorage);
+    const existingAgentDataLoaded = await this.loadAgentData(shouldLoadFromStorage);
+    if (existingAgentDataLoaded) {
+      await this.loadIsOpenState(shouldLoadFromStorage);
+      await this.loadMessagesHistory(shouldLoadFromStorage);
+    }
 
     if (this.isOpen && !this.started) {
       await this.start();
@@ -246,7 +246,7 @@ export class ChatStore {
     }
   }
 
-  private async loadAgentData(shouldLoadFromStorage: boolean) {
+  private async loadAgentData(shouldLoadFromStorage: boolean): Promise<boolean> {
     let isAgentDataLoaded = false;
 
     if (shouldLoadFromStorage) {
@@ -255,8 +255,16 @@ export class ChatStore {
       if (rawAgentData) {
         try {
           const agentData = JSON.parse(rawAgentData);
-          this.agentData$ = Object.assign({}, this.agentData, agentData);
-          isAgentDataLoaded = true;
+          if (this.agentData.id === agentData.id) {
+            this.agentData$ = Object.assign({}, this.agentData, agentData);
+            isAgentDataLoaded = true;
+          } else {
+            // tslint:disable-next-line
+            console.log(
+              "Existing local stored agent data is out of date. Resetting local agent data...",
+            );
+            this.storage.removeItem(StorageConstantsEnum.CHAT_AGENT_DATA);
+          }
         } catch (err) {
           // tslint:disable-next-line
           console.error("Error parsing local stored agent data. Resetting local agent data...");
@@ -264,6 +272,7 @@ export class ChatStore {
         }
       }
     }
+
     // Load from service
     if (!isAgentDataLoaded) {
       const result = await getAgentData(this.agentData.id);
@@ -279,6 +288,8 @@ export class ChatStore {
       this.agentData$ = Object.assign({}, this.agentData, agentData);
       this.storage.setItem(StorageConstantsEnum.CHAT_AGENT_DATA, JSON.stringify(this.agentData));
     }
+
+    return isAgentDataLoaded;
   }
 
   private loadIsOpenState(shouldLoadFromStorage: boolean) {
