@@ -20,15 +20,6 @@ stages:
     paths:
       - ./dist
 
-.run_widget_deploy_template:
-  image: python:latest
-  dependencies:
-    - run_build
-  script:
-    - pip install awscli
-    - aws s3 sync ./dist/ s3://widget.lightbot.io --delete --debug
-    - aws cloudfront create-invalidation --distribution-id ${AWS_CLOUDFRONT_WIDGET_INSTANCE_ID} --paths "/*"
-
 # Smart jobs
 run_build:
   stage: test
@@ -36,23 +27,10 @@ run_build:
   only:
     - master
 
-run_widget_deploy:
-  stage: deploy
-  extends: .run_widget_deploy_template
-  only:
-    - master
-
 # Manual jobs
 run_manual_build:
   stage: test
   extends: .run_build_template
-  when: manual
-
-run_manual_widget_deploy:
-  stage: deploy
-  extends: .run_widget_deploy_template
-  dependencies:
-    - run_manual_build
   when: manual
 
 
@@ -63,7 +41,7 @@ run_docker_build:
   services:
     - docker:dind
   only:
-    - new-backend
+    - master
   before_script:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
   script:
