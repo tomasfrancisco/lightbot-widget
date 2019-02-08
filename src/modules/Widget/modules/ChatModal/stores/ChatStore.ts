@@ -76,10 +76,9 @@ export class ChatStore {
 
     const shouldLoadFromStorage = !!(userId && sessionId);
     const existingAgentDataLoaded = await this.loadAgentData(shouldLoadFromStorage);
-    if (existingAgentDataLoaded) {
-      await this.loadIsOpenState(shouldLoadFromStorage);
-      await this.loadMessagesHistory(shouldLoadFromStorage);
-    }
+
+    await this.loadIsOpenState(shouldLoadFromStorage && existingAgentDataLoaded);
+    await this.loadMessagesHistory(shouldLoadFromStorage && existingAgentDataLoaded);
 
     if (this.isOpen && !this.started) {
       await this.start();
@@ -243,6 +242,8 @@ export class ChatStore {
         console.error("Error parsing local stored chat history. Resetting local history...");
         this.storage.removeItem(StorageConstantsEnum.CHAT_HISTORY);
       }
+    } else {
+      this.storage.removeItem(StorageConstantsEnum.CHAT_HISTORY);
     }
   }
 
@@ -300,6 +301,8 @@ export class ChatStore {
       if (rawIsChatOpen === "true") {
         this.isOpen = true;
       }
+    } else {
+      this.storage.removeItem(StorageConstantsEnum.CHAT_IS_OPEN);
     }
   }
 }
