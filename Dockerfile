@@ -6,11 +6,8 @@ WORKDIR /app
 COPY . .
 RUN yarn && yarn build && cp /app/build/static/js/main.*.js ./dist/lightbot.js
 
-FROM nginx:1.15-alpine
+FROM dirkdev98/docker-static
 
-RUN rm -rf /etc/nginx/conf.d
-COPY nginx /etc/nginx
+COPY --from=base /app/dist /public
 
-COPY --from=base /app/dist /usr/share/nginx/html
-
-EXPOSE 80
+EXPOSE 3000
